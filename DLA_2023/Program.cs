@@ -15,7 +15,7 @@
             
         }
 
-        static void Draw(Cell[,] field)
+        internal static void Draw(Cell[,] field)
         {
             Thread.Sleep(750);
             Console.Clear();

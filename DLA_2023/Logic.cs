@@ -11,27 +11,28 @@ namespace DLA_2023
     {
         static int _iteration = 0;
         static Random random = new Random();
-        static Globule _nullGlobule; // Нулевой центр кластеризации.
-        static List<Particle> particles = new List<Particle>(); 
+        static Cluster _nullCenter; // Нулевой центр кластеризации.
+        static List<Globule> globules = new List<Globule>(); 
 
         internal static Cell[,] MainCycle(Cell[,] field)
         {
             if (_iteration == 0)
             {
                 FillField(field);
-                _nullGlobule = new Globule(field);
-                //particles.Add(new Particle(field));
+                _nullCenter = new Cluster(field);
+                //globules.Add(new Globule(field));
             }
             if (_iteration > 0)
             {
-                particles.Add(new Particle(field));
-                for (int i = 0; i < particles.Count; i++)
+                globules.Add(new Globule(field));
+
+                for (int i = 0; i < globules.Count; i++)
                 {
-                    if (particles[i].CheckBoundary(field))
-                        particles.RemoveAt(i);
+                    if (globules[i].CheckBoundary(field))
+                        globules.RemoveAt(i);
                     else
                     {
-                        particles[i].Move(field);
+                        globules[i].Move(field);
                     }
 
                 }
