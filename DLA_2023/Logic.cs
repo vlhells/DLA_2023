@@ -12,7 +12,7 @@ namespace DLA_2023
         static int _iteration = 0;
         static Random random = new Random();
         static Cluster _nullCenter; // Нулевой центр кластеризации.
-        static List<Globule> globules = new List<Globule>();
+        static List<Globule> globules = new List<Globule>(); // Список появляющихся подвижных частиц.
         static int _substanceCells = 0;
 
         internal static Cell[,] MainCycle(Cell[,] field, out double currentPorosity)
@@ -22,22 +22,22 @@ namespace DLA_2023
                 FillField(field);
                 _nullCenter = new Cluster(field);
                 _substanceCells++;
-                //globules.Add(new Globule(field));
             }
             if (_iteration > 0)
             {
                 globules.Add(new Globule(field));
-                _substanceCells++;
 
                 for (int i = 0; i < globules.Count; i++)
                 {
                     if (globules[i].CheckBoundary(field))
+                    {
                         globules.RemoveAt(i);
+                        _substanceCells++;
+                    }
                     else
                     {
                         globules[i].Move(field);
                     }
-
                 }
             }
 

@@ -2,13 +2,12 @@
 {
     internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             string[] field_sizes = Console.ReadLine().Split('x');
             Cell[,] field = new Cell[int.Parse(field_sizes[0]), int.Parse(field_sizes[1])];
-            double porosity = double.Parse(Console.ReadLine());
+            double porosity = double.Parse(Console.ReadLine()); // Ввод типа 0,8.
             double currentPorosity = 100;
-
 
             while (currentPorosity > porosity)
             {
@@ -19,7 +18,7 @@
             
         }
 
-        internal static void Draw(Cell[,] field)
+        private static void Draw(Cell[,] field)
         {
             Thread.Sleep(750);
             Console.Clear();

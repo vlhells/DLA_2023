@@ -8,13 +8,10 @@ namespace DLA_2023
 {
     internal class Cluster
     {
-        private protected static Random random = new Random();
-        private protected static int _x;
-        private protected static int _y;
-        private protected char _state = '"';
-
-        internal static int X { get { return _x; } }
-        internal static int Y { get { return _y; } }
+        private static Random random = new Random();
+        private static int _x;
+        private static int _y;
+        private char _state = '"';
 
         internal Cluster(Cell[,] field)
         {

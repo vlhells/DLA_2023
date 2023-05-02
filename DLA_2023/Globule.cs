@@ -8,13 +8,10 @@ namespace DLA_2023
 {
     internal class Globule
     {
-        private protected static Random random = new Random();
-        private protected static int _x;
-        private protected static int _y;
-        private protected char _state = '*';
-
-        internal static int X { get { return _x; } }
-        internal static int Y { get { return _y; } }
+        private static Random random = new Random();
+        private int _x;
+        private int _y;
+        private char _state = '*';
 
         internal Globule(Cell[,] field)
         {
@@ -38,7 +35,7 @@ namespace DLA_2023
             {
                 coords = GenerateNewCoords(field);
             }
-            while (coords.x < 0 || coords.x >= field.GetLength(0) || coords.y < 0 || coords.y >= field.GetLength(1) || field[coords.x, coords.y].State == '*');
+            while (coords.x < 0 || coords.x >= field.GetLength(0) || coords.y < 0 || coords.y >= field.GetLength(1) || field[coords.x, coords.y].State != '.');
 
             _x = coords.x;
             _y = coords.y;
@@ -77,16 +74,16 @@ namespace DLA_2023
 
         internal bool CheckBoundary(Cell[,] field)
         {
-            for (int i = Globule._x - 1; i <= Globule._x + 1; i++)
+            for (int i = _x - 1; i <= _x + 1; i++)
             {
-                for (int j = Globule._y - 1; j <= Globule._y + 1; j++)
+                for (int j = _y - 1; j <= _y + 1; j++)
                 {
                     //if (i == Particle._x && j == Particle._y)
                     //    continue;
 
                     if (i >= 0 && j >= 0 && i < field.GetLength(0) && j < field.GetLength(1) && field[i, j].State == '"')
                     {
-                        field[Globule._x, Globule._y].State = field[i, j].State;
+                        field[_x, _y].State = field[i, j].State;
                         return true;
                     }
                 }
