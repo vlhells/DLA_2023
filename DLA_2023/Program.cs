@@ -6,11 +6,15 @@
         {
             string[] field_sizes = Console.ReadLine().Split('x');
             Cell[,] field = new Cell[int.Parse(field_sizes[0]), int.Parse(field_sizes[1])];
-            
-            while (true)
+            double porosity = double.Parse(Console.ReadLine());
+            double currentPorosity = 100;
+
+
+            while (currentPorosity > porosity)
             {
-                field = Logic.MainCycle(field);
+                field = Logic.MainCycle(field, out currentPorosity);
                 Draw(field);
+                Console.WriteLine($"\n{currentPorosity}");
             }
             
         }

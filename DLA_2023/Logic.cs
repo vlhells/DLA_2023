@@ -12,19 +12,22 @@ namespace DLA_2023
         static int _iteration = 0;
         static Random random = new Random();
         static Cluster _nullCenter; // Нулевой центр кластеризации.
-        static List<Globule> globules = new List<Globule>(); 
+        static List<Globule> globules = new List<Globule>();
+        static int _substanceCells = 0;
 
-        internal static Cell[,] MainCycle(Cell[,] field)
+        internal static Cell[,] MainCycle(Cell[,] field, out double currentPorosity)
         {
             if (_iteration == 0)
             {
                 FillField(field);
                 _nullCenter = new Cluster(field);
+                _substanceCells++;
                 //globules.Add(new Globule(field));
             }
             if (_iteration > 0)
             {
                 globules.Add(new Globule(field));
+                _substanceCells++;
 
                 for (int i = 0; i < globules.Count; i++)
                 {
@@ -38,8 +41,14 @@ namespace DLA_2023
                 }
             }
 
+            currentPorosity = PorosityCalculate(field);
             _iteration++;
             return field;
+        }
+
+        private static double PorosityCalculate(Cell[,] field)
+        {
+            return (field.Length - 1.0 * _substanceCells) / field.Length;
         }
 
         private static void FillField(Cell[,] field)
